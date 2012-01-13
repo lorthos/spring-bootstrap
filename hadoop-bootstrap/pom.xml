@@ -22,11 +22,6 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!--<dependency>-->
-		<!--<groupId>org.apache.hbase</groupId>-->
-		<!--<artifactId>hbase</artifactId>-->
-		<!--<version>0.90.4</version>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
@@ -45,6 +40,11 @@
 			<version>0.5.0-incubating</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase</artifactId>
+			<version>0.90.5</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -58,7 +58,7 @@
 					</descriptors>
 					<archive>
 						<manifest>
-							<mainClass>org.codemomentum.hadoop.MainJob</mainClass>
+							<mainClass>org.codemomentum.hadoop.HBaseJob</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

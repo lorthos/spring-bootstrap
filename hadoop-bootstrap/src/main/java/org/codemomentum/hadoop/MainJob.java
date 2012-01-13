@@ -3,6 +3,7 @@ package org.codemomentum.hadoop;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.hbase.mapreduce.TableOutputFormat;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileInputFormat;
@@ -62,6 +63,7 @@ public class MainJob extends Configured implements Tool {
 		}
 		FileInputFormat.setInputPaths(conf, other_args.get(0));
 		FileOutputFormat.setOutputPath(conf, new Path(other_args.get(1)));
+
 
 		JobClient.runJob(conf);
 		return 0;

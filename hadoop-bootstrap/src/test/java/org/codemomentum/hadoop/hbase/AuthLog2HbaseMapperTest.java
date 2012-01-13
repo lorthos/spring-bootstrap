@@ -1,27 +1,22 @@
-package org.codemomentum.hadoop.auth;
+package org.codemomentum.hadoop.hbase;
 
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.Mapper;
-import org.apache.hadoop.mapred.Reducer;
-import org.apache.hadoop.mrunit.MapReduceDriver;
+import org.apache.hadoop.mrunit.mapreduce.MapDriver;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author codemomentum@gmail.com
  */
-public class AuthLogMapperTest {
-	private Mapper mapper;
-	private MapReduceDriver driver;
-	private Reducer reducer;
+public class AuthLog2HbaseMapperTest {
+
+	private MapDriver driver;
 
 	@Before
 	public void setUp() {
-		mapper = new AuthLogMapper();
-		reducer = new AuthLogReducer();
-		driver = new MapReduceDriver(mapper, reducer);
+		AuthLog2HbaseMapper mapper = new AuthLog2HbaseMapper();
+		driver = new MapDriver(mapper);
 	}
 
 	@Test
@@ -31,9 +26,6 @@ public class AuthLogMapperTest {
 				.withInput(new LongWritable(3l), new Text("Dec 19 21:41:24 ip-11-111-111-111 sshd[21212]: Invalid user admin from 123.49.55.132"))
 				.withInput(new LongWritable(4l), new Text("Dec 19 21:43:21 ip-11-111-111-111 sshd[21300]: Invalid user admin from 123.49.55.132"))
 				.withInput(new LongWritable(4l), new Text("Dec 19 21:43:21 ip-11-111-111-111 sshd[21302]: Invalid user mysql from 123.49.55.133"))
-				.withOutput(new Text("118.219.234.227"), new IntWritable(2))
-				.withOutput(new Text("123.49.55.132"), new IntWritable(2))
-				.withOutput(new Text("123.49.55.133"), new IntWritable(1))
 				.runTest();
 	}
 }

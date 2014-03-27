@@ -25,6 +25,7 @@ public class JmsTest {
     @Test
     public void testBasicFlow() throws Exception {
         sender.send("foo bar");
+        sender.send("foo bar2");
 
         Thread.sleep(5000);
 

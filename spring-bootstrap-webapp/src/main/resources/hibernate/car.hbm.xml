@@ -9,10 +9,10 @@
             <generator class="identity" />
         </id>
         <property name="model" type="string">
-            <column name="MODEL" length="10"/>
+            <column name="MODEL" length="10" not-null="false" unique="false" />
         </property>
         <property name="color" type="string">
-            <column name="COLOR" length="20" not-null="true" unique="true" />
+            <column name="COLOR" length="20" not-null="false" unique="false" />
         </property>
     </class>
 </hibernate-mapping>

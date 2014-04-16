@@ -10,12 +10,6 @@
                                  http://www.springframework.org/schema/data/jpa
                                  http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!--<bean id="xaDataSourceforStorage" class="com.mysql.jdbc.jdbc2.optional.MysqlXADataSource">-->
-        <!--<property name="url" value="jdbc:mysql://localhost/test"/>-->
-        <!--<property name="user" value="root"/>-->
-        <!--<property name="password" value="root"/>-->
-    <!--</bean>-->
-
     <bean id="dataSourceforStorage"
           class="com.atomikos.jdbc.AtomikosDataSourceBean"
           init-method="init" destroy-method="close">
@@ -61,7 +55,8 @@
     </bean>
 
     <!-- Stock Data Access Object -->
-    <bean id="carRepository" class="org.codemomentum.spring.bootstrap.storage.repo.CarRepository" >
+    <bean id="carRepository" class="org.codemomentum.spring.bootstrap.storage.repo.CarRepositoryImpl">
         <property name="sessionFactory" ref="sessionFactory"></property>
+        <!--<property name="transactionManager" ref="JtaTransactionManager"/><property name="transactionManager" ref="JtaTransactionManager"/>-->
     </bean>
 </beans>

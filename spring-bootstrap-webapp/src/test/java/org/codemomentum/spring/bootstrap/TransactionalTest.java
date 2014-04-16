@@ -2,8 +2,8 @@ package org.codemomentum.spring.bootstrap;
 
 import org.codemomentum.spring.bootstrap.messaging.Receiver;
 import org.codemomentum.spring.bootstrap.messaging.Sender;
-import org.codemomentum.spring.bootstrap.storage.repo.CarRepository;
 import org.codemomentum.spring.bootstrap.storage.entity.Car;
+import org.codemomentum.spring.bootstrap.storage.repo.ICarRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class TransactionalTest {
     Receiver receiver;
 
     @Autowired
-    CarRepository carRepository;
+    ICarRepository carRepository;
 
     @Test
     public void testBasicFlow() throws Exception {
@@ -34,6 +34,12 @@ public class TransactionalTest {
         bmw.setColor("blue");
         bmw.setModel("bmw");
         carRepository.save(bmw);
+
+
+        Car alfa = new Car();
+        alfa.setColor("black");
+        alfa.setModel("alfa");
+        carRepository.saveAndSendMessage(alfa);
     }
 
 }

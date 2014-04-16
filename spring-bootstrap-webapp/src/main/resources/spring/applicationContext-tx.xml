@@ -44,5 +44,5 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
         <property name="userTransaction" ref="AtomikosUserTransaction"/>
     </bean>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="JtaTransactionManager"/>
 </beans>

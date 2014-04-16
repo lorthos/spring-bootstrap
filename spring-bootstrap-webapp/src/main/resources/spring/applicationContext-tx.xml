@@ -12,9 +12,8 @@ http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
           init-method="init" destroy-method="shutdownForce">
         <constructor-arg>
             <props>
-                <prop key="com.atomikos.icatch.service">com.atomikos.icatch.standalone.UserTransactionServiceFactory
-                </prop>
-                <prop key="com.atomikos.icatch.log_base_dir">atomikos</prop>
+                <prop key="com.atomikos.icatch.service">com.atomikos.icatch.standalone.UserTransactionServiceFactory</prop>
+                <prop key="com.atomikos.icatch.log_base_dir">./target/atomikos</prop>
                 <prop key="com.atomikos.icatch.console_log_level">DEBUG</prop>
             </props>
         </constructor-arg>

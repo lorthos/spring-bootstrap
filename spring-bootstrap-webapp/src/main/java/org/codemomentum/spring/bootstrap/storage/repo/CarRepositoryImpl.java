@@ -1,5 +1,6 @@
 package org.codemomentum.spring.bootstrap.storage.repo;
 
+import org.codemomentum.spring.bootstrap.messaging.ISender;
 import org.codemomentum.spring.bootstrap.storage.entity.Car;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Propagation;
@@ -12,7 +13,13 @@ import java.util.List;
  */
 
 
-public class CarRepositoryImpl extends HibernateDaoSupport implements ICarRepository{
+public class CarRepositoryImpl extends HibernateDaoSupport implements ICarRepository {
+
+    ISender sender;
+
+    public void setSender(ISender sender) {
+        this.sender = sender;
+    }
 
     @Override
     public void save(Car car) {
@@ -20,8 +27,9 @@ public class CarRepositoryImpl extends HibernateDaoSupport implements ICarReposi
     }
 
     @Override
-    @Transactional(propagation= Propagation.REQUIRED)
-    public void saveAndSendMessage(Car car) throws Exception{
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void saveAndSendMessage(Car car) throws Exception {
+        sender.send(car.toString());
         getHibernateTemplate().save(car);
     }
 

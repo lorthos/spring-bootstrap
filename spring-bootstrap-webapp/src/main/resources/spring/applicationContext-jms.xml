@@ -18,7 +18,7 @@
 
     <amq:broker useJmx="false" persistent="true">
         <amq:transportConnectors>
-            <amq:transportConnector uri="tcp://localhost:9200"/>
+            <amq:transportConnector uri="tcp://localhost:61616"/>
         </amq:transportConnectors>
         <amq:persistenceAdapter>
             <amq:jdbcPersistenceAdapter dataSource="#dataSource">
@@ -29,7 +29,14 @@
         </amq:persistenceAdapter>
     </amq:broker>
 
-    <amq:xaConnectionFactory id="xaConnectionFactory" brokerURL="tcp://localhost:9200"/>
+    <!--<amq:xaConnectionFactory id="xaConnectionFactory" brokerURL="tcp://localhost:61616"/>-->
+
+    <bean id="xaConnectionFactory"
+          class="org.apache.activemq.ActiveMQXAConnectionFactory">
+        <property name="brokerURL" value="tcp://localhost:61616" />
+    </bean>
+
+
 
     <bean id="jmsConnectionFactory"
           class="com.atomikos.jms.AtomikosConnectionFactoryBean"

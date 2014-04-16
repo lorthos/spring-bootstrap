@@ -17,10 +17,10 @@ import static org.junit.Assert.assertEquals;
 public class JmsTest {
 
     @Autowired
-    Sender sender;
+    ISender sender;
 
     @Autowired
-    Receiver receiver;
+    IReceiver receiver;
 
     @Test
     public void testBasicFlow() throws Exception {

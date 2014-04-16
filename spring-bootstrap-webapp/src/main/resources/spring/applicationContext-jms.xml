@@ -29,7 +29,17 @@
         </amq:persistenceAdapter>
     </amq:broker>
 
-    <amq:connectionFactory id="connectionFactory" brokerURL="tcp://localhost:9200"/>
+    <!--<amq:connectionFactory id="connectionFactory" brokerURL="tcp://localhost:9200"/>-->
+
+    <amq:xaConnectionFactory id="xaConnectionFactory" brokerURL="tcp://localhost:9200"/>
+
+    <bean id="jmsConnectionFactory"
+          class="com.atomikos.jms.AtomikosConnectionFactoryBean"
+          init-method="init">
+        <property name="xaConnectionFactory" ref="xaConnectionFactory"/>
+        <property name="localTransactionMode" value="false"/>
+        <property name="uniqueResourceName" value="amqp_xa"/>
+    </bean>
 
     <!--<bean id="connectionFactory"-->
     <!--class="org.apache.activemq.ActiveMQConnectionFactory">-->
@@ -43,10 +53,12 @@
 
     <bean id="jmsTemplate"
           class="org.springframework.jms.core.JmsTemplate">
-        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="connectionFactory" ref="jmsConnectionFactory"/>
         <property name="receiveTimeout" value="1000"/>
         <property name="defaultDestinationName" value="mailDestination"/>
+        <property name="sessionTransacted" value="true"/>
     </bean>
+
 
     <bean id="sender"
           class="org.codemomentum.spring.bootstrap.messaging.Sender">

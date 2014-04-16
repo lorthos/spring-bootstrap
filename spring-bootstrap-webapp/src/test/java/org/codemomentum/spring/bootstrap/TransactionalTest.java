@@ -1,12 +1,14 @@
-package org.codemomentum.spring.bootstrap.messaging;
+package org.codemomentum.spring.bootstrap;
 
+import org.codemomentum.spring.bootstrap.messaging.Receiver;
+import org.codemomentum.spring.bootstrap.messaging.Sender;
+import org.codemomentum.spring.bootstrap.storage.repo.CarRepository;
+import org.codemomentum.spring.bootstrap.storage.entity.Car;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * @author Halit
@@ -14,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations =
         {"classpath:spring/applicationContext.xml"})
-public class JmsTest {
+public class TransactionalTest {
 
     @Autowired
     Sender sender;
@@ -22,20 +24,16 @@ public class JmsTest {
     @Autowired
     Receiver receiver;
 
+    @Autowired
+    CarRepository carRepository;
+
     @Test
     public void testBasicFlow() throws Exception {
-        sender.send("foo bar");
-        sender.send("foo bar2");
 
-        Thread.sleep(5000);
-
-        String received = receiver.receiveMail();
-
-        assertEquals("messages does not match", "foo bar", received);
-
-        received = receiver.receiveMail();
-        assertEquals("messages does not match", "foo bar2", received);
-
-
+        Car bmw = new Car();
+        bmw.setColor("blue");
+        bmw.setModel("bmw");
+        carRepository.save(bmw);
     }
+
 }

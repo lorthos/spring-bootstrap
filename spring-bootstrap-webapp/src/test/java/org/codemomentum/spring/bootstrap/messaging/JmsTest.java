@@ -33,6 +33,6 @@ public class JmsTest {
 
         assertEquals("messages does not match", "foo bar", received);
 
-        Thread.sleep(100000);
+        Thread.sleep(1000);
     }
 }

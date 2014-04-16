@@ -6,8 +6,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.codemomentum</groupId>
-	<artifactId>spring-bootstrap-webapp</artifactId>
+    <artifactId>spring-bootstrap-webapp</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
 	<name>spring-bootstrap-webapp Maven Webapp</name>
@@ -15,7 +14,12 @@
 	<properties>
 		<spring.security.version>3.1.0.RELEASE</spring.security.version>
 		<spring.version>3.1.0.RELEASE</spring.version>
-	</properties>
+        <jms.version>1.1</jms.version>
+        <activemq.version>5.9.0</activemq.version>
+        <mysql.version>5.1.29</mysql.version>
+        <xbean-spring.version>3.16</xbean-spring.version>
+        <maven-jetty-plugin.version>6.1.10</maven-jetty-plugin.version>
+    </properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -94,22 +98,22 @@
         <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>jms</artifactId>
-            <version>1.1</version>
+            <version>${jms.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.activemq</groupId>
-            <version>5.9.0</version>
             <artifactId>activemq-all</artifactId>
+            <version>${activemq.version}</version>
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.29</version>
+            <version>${mysql.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.xbean</groupId>
             <artifactId>xbean-spring</artifactId>
-            <version>3.16</version>
+            <version>${xbean-spring.version}</version>
         </dependency>
 	</dependencies>
 	<build>
@@ -119,7 +123,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.10</version>
+				<version>${maven-jetty-plugin.version}</version>
 				<configuration>
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<stopKey>foo</stopKey>
